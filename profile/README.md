@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="https://capsule-render.vercel.app/api?type=waving&height=230&color=0:101827,45:38205E,100:7451B8&text=TEAM%20JACKAL&fontColor=FFFFFF&fontSize=58&fontAlignY=39&desc=SoftBank%20Hackathon%202026%20%7C%20Finals&descSize=18&descAlignY=62" width="100%" alt="Team Jackal — SoftBank Hackathon 2026 Finals" />
+<img src="assets/banner.svg" width="100%" alt="TEAM JACKAL · SoftBank Hackathon 2026 Finals" />
 
 ### SoftBank Hackathon 2026 — Finals
 
@@ -83,93 +83,25 @@
 <br />
 
 
-## From a Running Service to a Running Service
+## Repositories
 
-클라우드를 옮기는 일은 컨테이너 이미지를 다른 환경에 배포하는 것만으로 끝나지 않습니다.  
-네트워크와 스토리지, 애플리케이션 설정, **운영 중인 데이터와 사용자 트래픽**까지 함께 고려해야 합니다.
+| 저장소 | 역할 |
+| :--- | :--- |
+| [cloud-migration-platform](https://github.com/SoftBank-Hackathon-2026-Team-Jackal/cloud-migration-platform) | 이전 플랫폼 본체. 분석, 이미지 빌드, 샌드박스 검증, 배포 계획·승인, 온프레미스 Agent, 데이터 복제, 트래픽 전환을 담당하는 API와 Temporal 워커 |
+| [cloud-migration-web](https://github.com/SoftBank-Hackathon-2026-Team-Jackal/cloud-migration-web) | 사용자가 이전을 시작하고 단계별 진행 상황을 보고 승인하는 웹 화면 |
+| [demo-app](https://github.com/SoftBank-Hackathon-2026-Team-Jackal/demo-app) | 데모에서 옮기는 원본 앱. 메시지마다 어느 환경과 DB가 처리했는지 남기는 채팅 앱 |
+| [demo-application](https://github.com/SoftBank-Hackathon-2026-Team-Jackal/demo-application) | 초기 데모용 원본 앱과 시각화 웹. 현재 데모는 demo-app을 사용 |
+| [Softbank-Hackathon-2026-Finals](https://github.com/SoftBank-Hackathon-2026-Team-Jackal/Softbank-Hackathon-2026-Finals) | 대회 자료, 설계 메모, PoC 기록 |
 
-저희는 AWS 에서 운영 중인 백엔드 서비스를 분석하고, AI 기반 코드·설정 변환과 격리된 환경의 검증을 거쳐 **인프라·애플리케이션·데이터·트래픽을 하나의 마이그레이션 흐름으로 연결**합니다.
+<br />
+
+## Workflow
 
 <div align="center">
-
-| **SOURCE** | **DESTINATIONS** |
-|:--:|:--:|
-| AWS EKS | **AWS EKS · Google Kubernetes Engine · On-premises K3s** |
-| Running application + PostgreSQL | Kubernetes-based target environments |
-
+  <img src="assets/workflow.svg" width="100%" alt="이전 한 건의 흐름: 분석, 이미지 빌드, 샌드박스 검증, 이전 계획, 승인, 구축, 데이터 복제, DB 전환, 트래픽 전환, 완료" />
 </div>
 
-<br />
-
-## Why Jackal?
-
-<table>
-  <tr>
-    <td width="50%" valign="top">
-      <h3>🌐 Beyond Vendor Lock-In</h3>
-      서로 다른 클라우드의 인프라 구성 차이를 다루며, 특정 환경에 종속되지 않는 이전 경로를 지향합니다.
-    </td>
-    <td width="50%" valign="top">
-      <h3>🤖 AI-Assisted Adaptation</h3>
-      기존 인프라와 소스코드의 의존성을 분석하고, 대상 환경에 필요한 코드와 설정 변환을 준비합니다.
-    </td>
-  </tr>
-  <tr>
-    <td width="50%" valign="top">
-      <h3>🧪 Validate Before Change</h3>
-      격리된 Sandbox에서 실행을 검증하고, 실제 인프라 변경은 Preview와 사용자 승인 이후 진행합니다.
-    </td>
-    <td width="50%" valign="top">
-      <h3>🛡️ Stateful Migration</h3>
-      PostgreSQL 데이터 복제와 정합성, 트래픽 전환과 단계별 복구 가능성을 함께 고려합니다.
-    </td>
-  </tr>
-</table>
-
-<br />
-
-## One Journey, Multiple Destinations
-
-```mermaid
-flowchart TB
-    SOURCE["Running Service<br/>AWS EKS · PostgreSQL"]
-
-    subgraph PLATFORM["JACKAL · Migration Platform"]
-        direction TB
-        A["Analyze & Adapt"] --> B["Build & Sandbox"]
-        B --> C["Preview & Approve"]
-        C --> D["Provision & Deploy"]
-        D --> E["Replicate & Migrate"]
-        E --> F["Verify & Handover"]
-    end
-
-    SOURCE --> A
-    F --> AWS["AWS · EKS"]
-    F --> GCP["Google Cloud · GKE"]
-    F --> ONPREM["On-premises · K3s"]
-
-    classDef source fill:#182233,color:#ffffff,stroke:#53647D
-    classDef step fill:#EFEAFF,color:#32205F,stroke:#8E6ACE
-    classDef destination fill:#E7F4F0,color:#17594B,stroke:#52A68A
-    class SOURCE source
-    class A,B,C,D,E,F step
-    class AWS,GCP,ONPREM destination
-```
-
-<div align="center">
-  <sub>애플리케이션, 인프라, 데이터와 트래픽의 이전을 하나의 사용자 경험으로</sub>
-</div>
-
-<br />
-
-## Our Approach
-
-| Principle | What it means |
-|:---|:---|
-| **Plan Before Apply** | 실제 인프라 변경 전에 계획과 실행 산출물을 검토하고 승인합니다. |
-| **Build Once, Deploy Consistently** | Sandbox에서 검증한 이미지 Digest를 실제 배포에서도 사용합니다. |
-| **Separate AI from Execution** | AI의 분석·제안과 실제 운영 환경 변경의 책임을 분리합니다. |
-| **Protect Stateful Workloads** | 데이터 복제·정합성 검증과 트래픽 전환의 경계를 고려합니다. |
+운영 중인 EKS의 앱과 PostgreSQL을 분석해 이미지를 만들고, 격리된 샌드박스에서 먼저 검증합니다. 대상 환경에 맞춘 배포 계획을 사람이 승인하면 배포하고, 데이터를 복제한 뒤 짧은 쓰기 중단으로 DB를 전환하고 트래픽을 단계적으로 옮깁니다. 이 과정은 Temporal 워크플로우 하나로 이어지며, 자세한 내용은 [플랫폼 README](https://github.com/SoftBank-Hackathon-2026-Team-Jackal/cloud-migration-platform#readme)에 있습니다.
 
 <br />
 
@@ -210,8 +142,5 @@ flowchart TB
 <br />
 <br />
 
-*Build beyond boundaries. Migrate with confidence.*
-
-<img src="https://capsule-render.vercel.app/api?type=waving&section=footer&height=95&color=0:101827,45:38205E,100:7451B8" width="100%" alt="Footer decoration" />
 
 </div>
