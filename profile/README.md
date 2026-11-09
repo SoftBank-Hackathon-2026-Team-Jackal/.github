@@ -110,7 +110,6 @@
   <img src="assets/clips/02-db-cutover.gif" width="49%" alt="DB 전환" />
   <img src="assets/clips/03-traffic-shift.gif" width="98%" alt="트래픽 전환" />
   <br />
-  <sub>데이터 복제 · DB 전환 · 트래픽 전환 (웹 화면, 목업 데이터로 캡처)</sub>
 </div>
 
 <br />
